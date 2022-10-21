@@ -181,7 +181,7 @@ types:
       id: integer
       last_name: optional<string>
       system_key:
-        type: map<unknown, string>
+        type: map<string, string>
         # TODO figure out how to make these docs valid.
         # docs: example: OrderedMap { "employee_navigator": "281BX1", "wex_healthcloud": "CO11B" }
 
