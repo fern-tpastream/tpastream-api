@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+services:
+  http:
+    PublicKeyService:
+      base-path: /public_key/gpg
+      auth: true
+      endpoints:
+        get:
+          docs: Get a public key.
+          path: /
+          method: GET
+          response: PublicKey
+
+        create: 
+          docs: Create a public key. 
+          path: /
+          method: POST 
+          request: string 
+          response: PublicKey 
+
+        deleteKey:
+          docs: Delete a public key. 
+          method: DELETE
+          path: /{name}
+          path-parameters:
+            name: string 
+          
+
+types:
+  PublicKey: 
+    properties:
+      content: string 
+      expires: string 
+      name: string 
+      uuid: uuid 
