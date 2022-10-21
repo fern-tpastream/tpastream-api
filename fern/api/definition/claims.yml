@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+services:
+  http:
+    ClaimsService:
+      base-path: /claims
+      auth: true
+      endpoints:
+        getAll:
+          docs: This endpoint returns all of the claims for a
+          path: /
+          method: GET
+          query-parameters:
+            page:
+              type: optional<integer>
+              docs: Default value is 1
+            per_page:
+              type: optional<integer>
+              docs: Default value is 10
+          response: AllClaims
+
+types:
+  AllClaims:
+    properties:
+      data: AllClaimsData
+  AllClaimsData: list<Claim>
+  Claim:
+    properties:
+      amount_allowed:
+        type: integer
+        docs: Use computed_amount_allowed in case this field is missing.
+      amount_billed:
+        type: integer
+        docs: Use computed_amount_billed in case this field is missing.
+      amount_not_covered:
+        type: integer
+        docs: Use computed_amount_not_covered in case this field is missing.

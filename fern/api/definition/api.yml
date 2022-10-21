@@ -1,2 +1,4 @@
 name: api
-auth: bearer
+auth-scheme:
+  apiKey # me@example.com:MY_API_KEY
+#origin: https://app.tpastream.com/api/v2
