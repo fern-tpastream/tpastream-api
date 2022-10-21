@@ -10,7 +10,7 @@ services:
       auth: true
       endpoints:
 
-        getAll:
+        getAllEmployers:
           docs: Return all of the accounts for an Employer.
           path: /{employer_id}/member
           method: GET

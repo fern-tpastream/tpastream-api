@@ -9,7 +9,7 @@ services:
       base-path: /claims
       auth: true
       endpoints:
-        getAll:
+        getAllClaims:
           docs: Return all of the claims for an Employer.
           path: /
           method: GET
@@ -22,7 +22,7 @@ services:
               docs: Default value is 10
           response: AllClaims
 
-        get: 
+        getClaim: 
           docs: Return a claim by Claim Medical Id. 
           path: /{claim_medical_id}
           path-parameters:
