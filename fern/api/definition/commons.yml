@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+types:
+  Pageable:
+    properties:
+      has_next: boolean
+      has_prev: boolean
+      next_num: optional<integer>
+      page: optional<integer>
+      pages: optional<integer>
+      per_page: optional<integer>
+      prev_num: optional<integer>
+      total: optional<integer>

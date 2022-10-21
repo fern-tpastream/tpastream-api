@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+services:
+  http:
+    EmployersService:
+      base-path: /employer
+      auth: true
+      endpoints:
+
+        getAll:
+          docs: Return all of the accounts for an Employer.
+          path: /{employer_id}/member
+          method: GET
+          path-parameters:
+            employer_id: integer
+          query-parameters:
+            page:
+              type: optional<integer>
+              docs: Default value is 1
+            per_page:
+              type: optional<integer>
+              docs: Default value is 10
+          response: AllAccounts
+
+types:
+  AllAccounts:
+    extends: commons.Pageable
+    properties:
+      data: Account
+
+  Account: 
+    properties:
+      accounts: Accounts 
+      address: optional<string>
+      alegeus_key: optional<string>
+      archived: boolean 
+      archived_date: datetime 
+      archivedby: string 
+      can_make_claim_requests: optional<boolean>
+      # etc.
+      
+  Accounts: 
+    properties:
+      id: integer 
+      name: string
+    

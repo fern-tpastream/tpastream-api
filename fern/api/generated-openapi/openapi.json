@@ -1,0 +1,769 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "api",
+    "version": "0.0.6"
+  },
+  "paths": {
+    "/claims/": {
+      "get": {
+        "description": "Return all of the claims for an Employer.",
+        "operationId": "getAll",
+        "tags": [
+          "ClaimsService"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Default value is 1",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Default value is 10",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimsAllClaims"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthorizationAuth": []
+          }
+        ]
+      }
+    },
+    "/claims/{claim_medical_id}": {
+      "post": {
+        "description": "Return a claim by Claim Medical Id.",
+        "operationId": "get",
+        "tags": [
+          "ClaimsService"
+        ],
+        "parameters": [
+          {
+            "name": "claim_medical_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimsClaim"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthorizationAuth": []
+          }
+        ]
+      }
+    },
+    "/employer/{employer_id}/member": {
+      "get": {
+        "description": "Return all of the accounts for an Employer.",
+        "operationId": "getAll",
+        "tags": [
+          "EmployersService"
+        ],
+        "parameters": [
+          {
+            "name": "employer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Default value is 1",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Default value is 10",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployersAllAccounts"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthorizationAuth": []
+          }
+        ]
+      }
+    },
+    "/public_key/gpg/": {
+      "post": {
+        "description": "Create a public key.",
+        "operationId": "create",
+        "tags": [
+          "PublicKeyService"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicKeyPublicKey"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthorizationAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public_key/gpg/{name}": {
+      "delete": {
+        "description": "Delete a public key.",
+        "operationId": "deleteKey",
+        "tags": [
+          "PublicKeyService"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "AuthorizationAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClaimsAllClaims": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ClaimsClaim"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonsPageable"
+          }
+        ]
+      },
+      "ClaimsClaim": {
+        "type": "object",
+        "properties": {
+          "amount_allowed": {
+            "type": "integer",
+            "description": "Use computed_amount_allowed in case this field is missing."
+          },
+          "amount_billed": {
+            "type": "integer",
+            "description": "Use computed_amount_billed in case this field is missing."
+          },
+          "amount_not_covered": {
+            "type": "integer",
+            "description": "Use computed_amount_not_covered in case this field is missing."
+          },
+          "amount_paid": {
+            "type": "integer",
+            "description": "Use computed_amount_paid in case this field is missing."
+          },
+          "amount_paid_other": {
+            "type": "integer"
+          },
+          "check_date": {
+            "type": "string"
+          },
+          "check_number": {
+            "type": "string"
+          },
+          "claim_medical_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimsClaimLine"
+            }
+          },
+          "coinsurance_patient": {
+            "type": "integer",
+            "description": "Use computed_coinsurance_patient in case this field is missing."
+          },
+          "computed_amount_allowed": {
+            "type": "integer"
+          },
+          "computed_amount_billed": {
+            "type": "integer"
+          },
+          "computed_amount_paid": {
+            "type": "integer"
+          },
+          "computed_coinsurance_patient": {
+            "type": "integer"
+          },
+          "computed_copayment": {
+            "type": "integer"
+          },
+          "computed_patient_responsibility": {
+            "type": "integer"
+          },
+          "computed_reduction": {
+            "type": "integer"
+          },
+          "copayment": {
+            "type": "integer",
+            "description": "Use computed_copayment in case this field is missing."
+          },
+          "createddate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataobject_id": {
+            "type": "integer"
+          },
+          "date_column": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_of_service": {
+            "$ref": "#/components/schemas/ClaimsDateRange"
+          },
+          "discount": {
+            "type": "integer",
+            "description": "Use computed_discount in case this field is missing."
+          },
+          "eob_date": {
+            "type": "string"
+          },
+          "group_name": {
+            "type": "string"
+          },
+          "group_number": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "incurred_value": {
+            "type": "integer"
+          },
+          "is_incomplete": {
+            "type": "boolean",
+            "description": "This claim may have incomplete data. If a claim is marked as incomplete, we typically will not send it until it gets marked as complete. Reasons for an incomplete claim include (1) documentation that isn't yet available but we expect it to be in the near future, and (2) if we notice the claim has data redacted for privacy (example: a dependent over 16 years old), but we expect to get this data when a dependent links their account."
+          },
+          "last_updated_status": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Used as an indicator of when the last substantial change happened to this claim. If this date gets updated, we consider it necessary to re-send the claim for processing (in data exports) / flag it as \"unread\" in TPA Stream / etc. Typically this date gets updated when the patient_responsibility or status changes, or otherwise when is_incomplete changes to True."
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimsMember"
+            }
+          },
+          "modifieddate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "network": {
+            "$ref": "#/components/schemas/ClaimsNetwork"
+          },
+          "patient_account_number": {
+            "type": "string",
+            "description": "Patient Account Number for Service Provider (used for payments)"
+          },
+          "patient_name": {
+            "type": "string"
+          },
+          "patient_payer_number": {
+            "type": "string",
+            "description": "Patient Account Number for Carrier"
+          },
+          "patient_responsibility": {
+            "type": "integer",
+            "description": "Use computed_patient_responsibility in case this field is missing."
+          },
+          "policy_holder": {
+            "$ref": "#/components/schemas/ClaimsPolicyHolder"
+          },
+          "processed_on": {
+            "type": "string"
+          },
+          "recrawl_requested": {
+            "type": "boolean",
+            "description": "Attempt to recrawl when True"
+          },
+          "reduction": {
+            "type": "integer",
+            "description": "This is the amount the deductible was reduced by. Most systems refer to this as 'deductible'. Use computed_reduction in case this field is empty."
+          },
+          "remarks": {
+            "type": "string",
+            "description": "These are the notes for the Claim."
+          },
+          "service_provider": {
+            "type": "string",
+            "description": "Service Provider Name. This is the physical name, and is provided by the Payer."
+          },
+          "service_provider_address": {
+            "type": "string",
+            "description": "Physical address of Service Provider"
+          },
+          "service_provider_billing_address": {
+            "type": "string"
+          },
+          "service_provider_billing_name": {
+            "type": "string",
+            "description": "This is the service_provider's Billing name, which is often different from their physical address name."
+          },
+          "service_provider_billing_npi_number": {
+            "type": "integer",
+            "description": "NPI Number of Billing Service Provider"
+          },
+          "service_provider_billing_number": {
+            "type": "string",
+            "description": "Federal Tax ID of Billing Service Provider"
+          },
+          "service_provider_billing_phone": {
+            "type": "string"
+          },
+          "service_provider_npi_number": {
+            "type": "integer",
+            "description": "NPI Number of Service Provider"
+          },
+          "service_provider_number": {
+            "type": "string",
+            "description": "Federal Tax ID of Service Provider"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ClaimsClaimStatus"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ClaimsClaimType"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "vendor_system_id": {
+            "type": "string",
+            "description": "This field is unique for each Payer. Occasionally TPA Stream may append data to the end of this key to enforce uniqueness, such as the date_of_service, patient_responsibility, etc."
+          }
+        },
+        "required": [
+          "claim_medical_lines",
+          "is_incomplete",
+          "policy_holder"
+        ]
+      },
+      "ClaimsClaimLine": {
+        "type": "object",
+        "properties": {
+          "amount_allowed": {
+            "type": "integer"
+          },
+          "amount_billed": {
+            "type": "integer"
+          },
+          "amount_not_covered": {
+            "type": "integer"
+          },
+          "amount_paid": {
+            "type": "integer"
+          },
+          "amount_paid_other": {
+            "type": "integer"
+          },
+          "coinsurance_patient": {
+            "type": "integer"
+          },
+          "copayment": {
+            "type": "integer"
+          },
+          "date_of_service": {
+            "$ref": "#/components/schemas/ClaimsDateRange"
+          },
+          "days_supply": {
+            "type": "integer"
+          },
+          "diagnosis_code": {
+            "type": "string"
+          },
+          "discount": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "national_drug_code": {
+            "type": "string"
+          },
+          "patient_responsibility": {
+            "type": "integer"
+          },
+          "prescription_type_id": {
+            "type": "integer"
+          },
+          "prescription_type_str": {
+            "type": "string"
+          },
+          "procedure_code": {
+            "type": "string"
+          },
+          "procedure_name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "reduction": {
+            "type": "integer"
+          },
+          "total_patient_responsibility": {
+            "type": "integer"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "vendor_system_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date_of_service"
+        ]
+      },
+      "ClaimsDateRange": {
+        "type": "object",
+        "properties": {
+          "bounds": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string"
+          }
+        }
+      },
+      "ClaimsMember": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "employer": {
+            "$ref": "#/components/schemas/ClaimsEmployer"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "system_key": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "employer",
+          "id",
+          "system_key"
+        ]
+      },
+      "ClaimsEmployer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "reimbursement_policy": {}
+        },
+        "required": [
+          "reimbursement_policy"
+        ]
+      },
+      "ClaimsNetwork": {
+        "type": "string",
+        "enum": [
+          "IN",
+          "OUT",
+          "TIER1",
+          "TIER2"
+        ]
+      },
+      "ClaimsPolicyHolder": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ClaimsClaimStatus": {
+        "type": "string",
+        "enum": [
+          "In Process",
+          "Processed",
+          "Rejected",
+          "Adjusted",
+          "Partially Approved"
+        ]
+      },
+      "ClaimsClaimType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/ClaimsClaimTypeName"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ClaimsClaimTypeName": {
+        "type": "string",
+        "enum": [
+          "medical",
+          "dental",
+          "rx",
+          "vision",
+          "facility"
+        ]
+      },
+      "ClaimsClaimTypeId": {
+        "type": "string",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "CommonsPageable": {
+        "type": "object",
+        "properties": {
+          "has_next": {
+            "type": "boolean"
+          },
+          "has_prev": {
+            "type": "boolean"
+          },
+          "next_num": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "pages": {
+            "type": "integer"
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "prev_num": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "has_next",
+          "has_prev"
+        ]
+      },
+      "EmployersAllAccounts": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EmployersAccount"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonsPageable"
+          }
+        ]
+      },
+      "EmployersAccount": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "$ref": "#/components/schemas/EmployersAccounts"
+          },
+          "address": {
+            "type": "string"
+          },
+          "alegeus_key": {
+            "type": "string"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "archived_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "archivedby": {
+            "type": "string"
+          },
+          "can_make_claim_requests": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "accounts",
+          "archived",
+          "archived_date",
+          "archivedby"
+        ]
+      },
+      "EmployersAccounts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "PublicKeyPublicKey": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "expires": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "content",
+          "expires",
+          "name",
+          "uuid"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "AuthorizationAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  }
+}
