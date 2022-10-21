@@ -8,7 +8,7 @@ release:
     github:
       repository: fern-tpastream/tpastream-node
   - name: fernapi/fern-java-sdk
-    version: 0.0.118
+    version: 0.0.119
     publishing:
       maven:
         coordinate: io.github.fern-api:tpastream
