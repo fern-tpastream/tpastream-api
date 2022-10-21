@@ -1,20 +1,22 @@
-# {Company} API
+# TPA Stream API
 
 Tagging a release on this repository will:
 
-- Update the [TypeScript SDK Github Repo](https://github.com/fern-{company}/{company}-node)
+- Update the [OpenAPI description Github Repo](https://github.com/fern-tpastream/tpastream-openapi)
+- Update the [TypeScript SDK Github Repo](https://github.com/fern-tpastream/tpastream-node)
+- Update the [Java SDK Github Repo](https://github.com/fern-tpastream/tpastream-java)
 - _More SDKs to come..._
 
 ## What is in this repository?
 
 This repository contains
 
-- {Company}'s Fern API Definition which lives in the [definition](./fern/api/definition/) folder
+- [DRAFT] TPA Stream's Fern API Definition which lives in the [definition](./fern/api/definition/) folder
 - Generators (see [generators.yml](./fern/api/generators.yml))
 
 ## What is in the API Definition?
 
-The API Definition contains information about what endpoints, types, and errors are used in the API. The definition is broken into smaller files such as [{TODO}.yml](fern/api/definition/{TODO}.yml) and [{TODO}.yml](fern/api/definition/{TODO}.yml).
+The API Definition contains information about what endpoints, types, and errors are used in the API. The definition is broken into smaller files such as [claims.yml](fern/api/definition/claims.yml) and [employers.yml](fern/api/definition/employers.yml).
 
 In order to make sure that the definition is valid, you can use the Fern CLI.
 
