@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+  employer: employer.yml
+
+services:
+  http:
+    MembersService:
+      base-path: /member
+      auth: true
+      endpoints:
+
+        getAllMembers:
+          docs: Return all of the members for an Employer.
+          path: /
+          method: GET
+          query-parameters:
+            page:
+              type: optional<integer>
+              docs: Default value is 1
+            per_page:
+              type: optional<integer>
+              docs: Default value is 10
+          response: AllMembers
+
+        getMember: 
+          docs: Return a member by Member Id. 
+          path: /{member_id}
+          path-parameters:
+            member_id: string 
+          response: MemberResponse
+
+types:
+  AllMembers: 
+    extends: commons.Pageable
+    properties: 
+      data: Member 
+  
+  Member:
+    properties:
+      email: optional<string>
+      employer: employer.Employer
+      first_name: optional<string>
+      id: integer
+      last_name: optional<string>
+      system_key:
+        type: map<string, string>
+        # TODO figure out how to make these docs valid.
+        # docs: example: OrderedMap { "employee_navigator": "281BX1", "wex_healthcloud": "CO11B" }
+
+  MemberResponse: 
+    properties:
+      data: Member

@@ -47,3 +47,8 @@ types:
       id: integer 
       name: string
     
+  Employer:
+    properties:
+      id: optional<integer>
+      name: optional<string>
+      reimbursement_policy: unknown

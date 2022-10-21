@@ -6,29 +6,50 @@ imports:
 services:
   http:
     PublicKeyService:
-      base-path: /public_key/gpg
+      base-path: /public_key/
       auth: true
       endpoints:
-        get:
+        getGpg:
           docs: Get a public key.
-          path: /
+          path: /gpg
           method: GET
           response: PublicKey
 
-        create: 
+        createGpg: 
           docs: Create a public key. 
-          path: /
+          path: /gpg
           method: POST 
           request: string 
           response: PublicKey 
 
-        deleteKey:
+        deleteGpg:
           docs: Delete a public key. 
           method: DELETE
           path: /{name}
           path-parameters:
             name: string 
           
+        getRsa:
+          docs: Get a public key.
+          path: /rsa
+          method: GET
+          response: PublicKey
+
+        createRsa: 
+          docs: Create a public key. 
+          path: /rsa
+          method: POST 
+          request: string 
+          response: PublicKey 
+
+        deleteRsa:
+          docs: Delete a public key. 
+          method: DELETE
+          path: /{name}
+          path-parameters:
+            name: string 
+
+        
 
 types:
   PublicKey: 
