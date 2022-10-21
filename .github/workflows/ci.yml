@@ -23,14 +23,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Set up node
+      - name: Setup node
         uses: actions/setup-node@v2
+      
+      - name: Setup Java
+        id: setup-jre
+        uses: actions/setup-java@v1
+        with:
+          java-version: "11"
+          architecture: x64
       
       - name: Download Fern
         run: npm install -g fern-api
 
       - name: Release SDKs
         env:
+          FERN_MAVEN_TOKEN: ${{ secrets.FERN_MAVEN_TOKEN }}
           FERN_NPM_TOKEN: ${{ secrets.FERN_NPM_TOKEN }}
         run: fern release ${{ github.ref_name }} --log-level debug
-        
+  
