@@ -12,7 +12,7 @@ release:
     publishing:
       maven:
         coordinate: io.github.fern-api:tpastream
-        username: dsinghvi
+        username: ${FERN_MAVEN_USERNAME}
         password: ${FERN_MAVEN_TOKEN}
     github:
       repository: fern-tpastream/tpastream-java
