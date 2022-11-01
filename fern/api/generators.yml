@@ -1,6 +1,6 @@
 release:
   - name: fernapi/fern-typescript-sdk
-    version: 0.0.224
+    version: 0.0.227
     publishing:
       npm:
         package-name: '@fern-api/tpastream'
@@ -28,8 +28,3 @@ release:
         workspace-id: ${FERN_POSTMAN_WORKSPACE_ID}
     github:
       repository: fern-tpastream/tpastream-postman
-draft:
-  - name: fernapi/fern-postman
-    version: 0.0.25
-    mode: download-files
-    output-path: ./generated-postman
