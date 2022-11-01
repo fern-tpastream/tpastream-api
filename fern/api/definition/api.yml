@@ -1,3 +1,6 @@
 name: api
 auth: basic
-# origin: https://app.tpastream.com/api/v2
+environments: 
+  Production: https://app.tpastream.com/api/v2
+default-environment: Production 
+error-discriminant: error

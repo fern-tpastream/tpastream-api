@@ -23,14 +23,12 @@ services:
               docs: Default value is 10
           response: AllClaims
 
-        getClaim: 
-          docs: Return a claim by Claim Medical Id. 
+        getClaim:
+          docs: Return a claim by Claim Medical Id.
           path: /{claim_medical_id}
           path-parameters:
-            claim_medical_id: integer 
+            claim_medical_id: integer
           response: Claim
-
-        
 
 types:
   AllClaims:
@@ -173,7 +171,6 @@ types:
       bounds: optional<string>
       end: optional<string>
       start: optional<string>
-
 
   Network:
     enum:
