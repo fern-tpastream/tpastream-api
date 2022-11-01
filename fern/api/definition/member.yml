@@ -35,20 +35,8 @@ types:
   AllMembers: 
     extends: commons.Pageable
     properties: 
-      data: Member 
+      data: employer.Member 
   
-  Member:
-    properties:
-      email: optional<string>
-      employer: employer.Employer
-      first_name: optional<string>
-      id: integer
-      last_name: optional<string>
-      system_key:
-        type: map<string, string>
-        # TODO figure out how to make these docs valid.
-        # docs: example: OrderedMap { "employee_navigator": "281BX1", "wex_healthcloud": "CO11B" }
-
   MemberResponse: 
     properties:
-      data: Member
+      data: employer.Member

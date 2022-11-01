@@ -2,5 +2,4 @@ name: api
 auth: basic
 environments: 
   Production: https://app.tpastream.com/api/v2
-default-environment: Production 
-error-discriminant: error
+default-environment: Production

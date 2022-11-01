@@ -2,7 +2,7 @@
 
 imports:
   commons: commons.yml
-  member: member.yml
+  employer: employer.yml
 
 services:
   http:
@@ -10,7 +10,8 @@ services:
       base-path: /claims
       auth: true
       endpoints:
-        getAllClaims:
+
+        getAll:
           docs: Return all of the claims for an Employer.
           path: /
           method: GET
@@ -23,7 +24,7 @@ services:
               docs: Default value is 10
           response: AllClaims
 
-        getClaim:
+        get:
           docs: Return a claim by Claim Medical Id.
           path: /{claim_medical_id}
           path-parameters:
@@ -86,7 +87,7 @@ types:
       last_updated_status:
         type: optional<datetime>
         docs: Used as an indicator of when the last substantial change happened to this claim. If this date gets updated, we consider it necessary to re-send the claim for processing (in data exports) / flag it as "unread" in TPA Stream / etc. Typically this date gets updated when the patient_responsibility or status changes, or otherwise when is_incomplete changes to True.
-      members: optional<list<member.Member>>
+      members: optional<list<employer.Member>>
       modifieddate: optional<datetime>
       network: optional<Network>
       patient_account_number:

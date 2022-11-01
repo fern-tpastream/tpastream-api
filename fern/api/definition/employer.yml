@@ -9,9 +9,8 @@ services:
       base-path: /employer
       auth: true
       endpoints:
-
-        getAllEmployers:
-          docs: Return all of the accounts for an Employer.
+        getAllMembers:
+          docs: Return all of the accounts for the members of an Employer's.
           path: /{employer_id}/member
           method: GET
           path-parameters:
@@ -23,32 +22,150 @@ services:
             per_page:
               type: optional<integer>
               docs: Default value is 10
-          response: AllAccounts
+          response: MemberPagination
 
 types:
-  AllAccounts:
+  MemberPagination:
     extends: commons.Pageable
     properties:
-      data: Account
+      data: Member
 
-  Account: 
+  Member1:
     properties:
-      accounts: Accounts 
+      accounts: optional<list<Account>>
       address: optional<string>
       alegeus_key: optional<string>
-      archived: boolean 
-      archived_date: datetime 
-      archivedby: string 
+      archived: optional<boolean>
+      archived_date: optional<datetime>
+      archivedby: optional<ArchivedBy>
       can_make_claim_requests: optional<boolean>
-      # etc.
-      
-  Accounts: 
+      can_use_portal: optional<boolean>
+      createddate: optional<datetime>
+      date_of_birth: optional<string>
+      dependents: optional<list<Dependent>>
+      email: optional<string>
+      employer: optional<Employer>
+      first_name: optional<string>
+      first_name_derived: optional<string>
+      full_name_derived: optional<string>
+      gender: optional<string>
+      hire_term_daterange: optional<HireTermDaterange>
+      id: optional<integer>
+      last_name: optional<string>
+      last_name_derived: optional<string>
+      modifieddate: optional<datetime>
+      phone_home: optional<string>
+      phone_mobile: optional<string>
+      ssn: optional<string>
+      tenant: optional<Tenant>
+      unread_count: optional<integer>
+      vendor_members: list<VendorMember>
+
+  Account:
     properties:
-      id: integer 
+      id: integer
       name: string
-    
+
+  ArchivedBy:
+    properties:
+      email: optional<string>
+      id: optional<integer>
+
   Employer:
     properties:
       id: optional<integer>
-      name: optional<string>
+      name: string
       reimbursement_policy: unknown
+
+  Employer1:
+    properties:
+      archived: optional<boolean>
+      eligible_payers: optional<list<Payer>>
+      email_automation: optional<boolean>
+      employer_id: optional<integer>
+      id: optional<integer>
+      name: string
+      payers: list<Payer1>
+      slug: optional<string>
+      support_email_derived: optional<string>
+      support_phone_derived: optional<string>
+      support_logo_derived: optional<string>
+      support_name_derived: optional<string>
+
+  Payer:
+    properties:
+      id: optional<integer>
+      name: string
+      short_name: optional<string>
+
+  Payer1:
+    properties:
+      id: optional<integer>
+      name: string
+      retriever: string
+      short_name: optional<string>
+
+  Dependent:
+    properties:
+      address: optional<string>
+      alegeus_key: optional<string>
+      createddate: datetime
+      date_of_birth: optional<string>
+      email: optional<string>
+      first_name: optional<string>
+      gender: optional<string>
+      id: optional<integer>
+      last_name: string
+      middle_name: string
+      modifieddate: datetime
+      ssn: optional<string>
+
+  Member:
+    properties:
+      email: optional<string>
+      employer: Employer
+      first_name: optional<string>
+      id: integer
+      last_name: optional<string>
+      system_key:
+        type: map<string, string>
+        # TODO figure out how to make these docs valid.
+        # docs: example: OrderedMap { "employee_navigator": "281BX1", "wex_healthcloud": "CO11B" }
+  
+  VendorMember: 
+    properties:
+      key: string 
+      vendor_tenant: VendorTenant
+
+  VendorTenant: 
+    properties:
+      id: optional<integer>
+      label: optional<string>
+      vendor: optional<Vendor>
+
+  Vendor: 
+    properties:
+      code: string 
+      id: optional<integer>
+      name: string 
+
+  Tenant: 
+    properties:
+      alegeus_key_enabled: optional<boolean>
+      id: optional<integer>
+      name: string 
+      tenant_id: integer
+      vendor_tenants: VendorTenant1
+
+  VendorTenant1: 
+    properties:
+      id: optional<integer>
+      key_enabled: optional<boolean>
+      label: optional<string>
+      vendor: optional<Vendor>
+
+  HireTermDaterange: 
+    properties:
+      bounds: optional<string>
+      end: optional<string>
+      start: optional<string>
