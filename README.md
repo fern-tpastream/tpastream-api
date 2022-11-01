@@ -1,10 +1,11 @@
 # TPA Stream API
 
-Tagging a release on this repository will:
+Tagging a release on this repository will update the:
 
-- Update the [OpenAPI description Github Repo](https://github.com/fern-tpastream/tpastream-openapi)
-- Update the [TypeScript SDK Github Repo](https://github.com/fern-tpastream/tpastream-node)
-- Update the [Java SDK Github Repo](https://github.com/fern-tpastream/tpastream-java)
+- [OpenAPI description Github Repo](https://github.com/fern-tpastream/tpastream-openapi)
+- [TypeScript SDK Github Repo](https://github.com/fern-tpastream/tpastream-node)
+- [Java SDK Github Repo](https://github.com/fern-tpastream/tpastream-java)
+- [Postman Collection Github Repo](https://github.com/fern-tpastream/tpastream-postman)
 - _More SDKs to come..._
 
 ## What is in this repository?
