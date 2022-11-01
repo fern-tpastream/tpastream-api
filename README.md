@@ -1,18 +1,18 @@
 # TPA Stream API
 
-Tagging a release on this repository will update the:
+Tagging a release on this repository will update the TPA Stream:
 
-- [OpenAPI description Github Repo](https://github.com/fern-tpastream/tpastream-openapi)
-- [TypeScript SDK Github Repo](https://github.com/fern-tpastream/tpastream-node)
-- [Java SDK Github Repo](https://github.com/fern-tpastream/tpastream-java)
-- [Postman Collection Github Repo](https://github.com/fern-tpastream/tpastream-postman)
+- [OpenAPI description](https://github.com/fern-tpastream/tpastream-openapi)
+- [TypeScript SDK](https://github.com/fern-tpastream/tpastream-node)
+- [Java SDK](https://github.com/fern-tpastream/tpastream-java)
+- [Postman Collection](https://github.com/fern-tpastream/tpastream-postman)
 - _More SDKs to come..._
 
 ## What is in this repository?
 
 This repository contains
 
-- [DRAFT] TPA Stream's Fern API Definition which lives in the [definition](./fern/api/definition/) folder
+- TPA Stream's Fern API Definition which lives in the [definition](./fern/api/definition/) folder
 - Generators (see [generators.yml](./fern/api/generators.yml))
 
 ## What is in the API Definition?
