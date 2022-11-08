@@ -21,7 +21,7 @@ release:
     github:
       repository: fern-tpastream/tpastream-openapi
   - name: fernapi/fern-postman
-    version: 0.0.27
+    version: 0.0.28
     publishing:
       postman:
         api-key: ${FERN_POSTMAN_API_KEY}
